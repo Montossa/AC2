@@ -1,0 +1,67 @@
+<section class="lista">
+  <h2>Empréstimos cadastrados</h2>
+
+  <div class="contadores">
+    <div class="contador total">
+      <span>Total de empréstimos</span>
+      <strong>{{ total }}</strong>
+    </div>
+
+    <div class="contador aberto">
+      <span>Em aberto</span>
+      <strong>{{ emAberto }}</strong>
+    </div>
+
+    <div class="contador devolvido">
+      <span>Devolvidos</span>
+      <strong>{{ devolvidos }}</strong>
+    </div>
+  </div>
+
+  <div *ngIf="emprestimos.length === 0" class="vazio">
+    Nenhum empréstimo cadastrado
+  </div>
+
+  <div *ngFor="let emprestimo of emprestimos" class="emprestimo">
+    <div class="informacoes">
+      <h3>{{ emprestimo.tituloLivro }}</h3>
+
+      <p>
+        <strong>Responsável:</strong>
+        {{ emprestimo.nomePessoa }}
+      </p>
+
+      <p>
+        <strong>Devolução prevista:</strong>
+        {{ emprestimo.dataPrevistaDevolucao | date:'dd/MM/yyyy':'UTC' }}
+      </p>
+
+      <span
+        class="status"
+        [class.status-aberto]="!emprestimo.devolvido"
+        [class.status-devolvido]="emprestimo.devolvido"
+      >
+        {{ emprestimo.devolvido ? 'Devolvido' : 'Em aberto' }}
+      </span>
+    </div>
+
+    <div class="acoes">
+      <button
+        type="button"
+        class="btn-devolver"
+        [disabled]="emprestimo.devolvido"
+        (click)="devolver.emit(emprestimo.id)"
+      >
+        Registrar devolução
+      </button>
+
+      <button
+        type="button"
+        class="btn-remover"
+        (click)="remover.emit(emprestimo.id)"
+      >
+        Remover
+      </button>
+    </div>
+  </div>
+</section>

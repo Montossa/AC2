@@ -1,0 +1,46 @@
+<section class="formulario">
+  <h2>Cadastrar empréstimo</h2>
+
+  <form #form="ngForm" (ngSubmit)="salvar()">
+    <div class="campo">
+      <label for="nomePessoa">Nome da pessoa</label>
+      <input
+        id="nomePessoa"
+        name="nomePessoa"
+        type="text"
+        [(ngModel)]="nomePessoa"
+        placeholder="Digite o nome da pessoa"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="tituloLivro">Título do livro</label>
+      <input
+        id="tituloLivro"
+        name="tituloLivro"
+        type="text"
+        [(ngModel)]="tituloLivro"
+        placeholder="Digite o título do livro"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="dataPrevistaDevolucao">
+        Data prevista de devolução
+      </label>
+      <input
+        id="dataPrevistaDevolucao"
+        name="dataPrevistaDevolucao"
+        type="date"
+        [(ngModel)]="dataPrevistaDevolucao"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      Cadastrar empréstimo
+    </button>
+  </form>
+</section>
